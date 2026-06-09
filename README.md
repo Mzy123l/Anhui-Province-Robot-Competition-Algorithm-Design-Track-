@@ -93,6 +93,10 @@ public:
 
         // 如果在STL中使用
         std::vector<T, allocator::PoolAllocator<T, 64>> vec(_alloc);
+
+        // 如果要分配更多内存
+        char* large_buffer = _alloc.allocate(10); // 分配10个 char 大小的内存，large_buffer指向首地址
+
     }
     
 private:

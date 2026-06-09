@@ -1,5 +1,6 @@
 #pragma once
 #include "memory_pool.hpp"
+#include <utility>
 
 namespace allocator
 {
@@ -46,17 +47,17 @@ namespace allocator
             : pool_(other.get_pool())
         {}
 
-        // 分配内存
+        // 分配内存, 特化一个的版本
         T* allocate()
         {
-
             // 从内存池分配
             void* ptr = pool_->allocate<T>();
-            if (!ptr)
-            {
-                return nullptr;
-            }
+            return static_cast<T*>(ptr);
+        }
 
+        T* allocate(std::size_t n)
+        {
+            void* ptr = pool_->allocate<T>(n);
             return static_cast<T*>(ptr);
         }
         // 释放内存

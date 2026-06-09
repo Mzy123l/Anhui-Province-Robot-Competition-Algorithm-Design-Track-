@@ -1,6 +1,8 @@
 #pragma once
 #include "allocator.hpp"
 #include <print>
+#include <cstdint>
+
 namespace Tasks
 {
     // A.间距调整 / Brake distance
@@ -40,8 +42,7 @@ namespace Tasks
         void solve(uint32_t n);
         void show_result() const;
 
-    private:
-        void reverse_inplace(char* begin, char* end);
+   
         
     private:
         memory_pool::MemoryPool<64> _pool;
