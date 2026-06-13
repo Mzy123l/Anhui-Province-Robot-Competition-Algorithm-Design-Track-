@@ -12,7 +12,7 @@ endif()
 project ("Tasks")
 
 # 将源代码添加到此项目的可执行文件。
-add_executable (Tasks "Tasks.cpp" "src/brake_distance.cpp")
+add_executable (Tasks "Tasks.cpp" "src/brake_distance.cpp" "src/fast_charging.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Tasks PROPERTY CXX_STANDARD 23)

@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "include/brake_distance.h"
+#include "include/fast_charging.h"
 #include "include/timer.hpp"
 #include <iostream>
 
@@ -17,7 +18,9 @@ namespace Tasks
             case 'A':
                 taskA();
                 break;
-            
+            case 'E':
+                taskE();
+                break;
 
             }
         }
@@ -39,6 +42,18 @@ namespace Tasks
 
             bd.show_result();
 
+            timer.show_time();
+        }
+        void taskE()
+        {
+            timer::Timer<timer::TimeUnit::Nanoseconds> timer;
+            uint32_t a, b, c;
+            std::cin >> a >> b >> c;
+            timer.start();
+            FastCharging fc;
+            fc.solve(a, b, c);
+            timer.stop();
+            fc.show_result();
             timer.show_time();
         }
     };
