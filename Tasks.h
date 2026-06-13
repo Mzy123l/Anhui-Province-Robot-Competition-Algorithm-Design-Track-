@@ -45,17 +45,20 @@ namespace Tasks
             timer.show_time();
         }
 
-        void taskB() {
+        void taskB()
+        {
             timer::Timer<timer::TimeUnit::Microseconds> timer;
             int32_t C;
             std::string opsStr;
             std::cin >> C;
-            std::cin.ignore();                    // 忽略换行
-            std::getline(std::cin, opsStr);       // 读取整行操作字符串
+            std::cin.ignore();                 // 忽略换行
+            std::getline(std::cin, opsStr);
+
             timer.start();
             TaskB tb;
             tb.solve(C, opsStr);
             timer.stop();
+            tb.show_result();
             timer.show_time();
         }
     };
