@@ -49,14 +49,14 @@ namespace Tasks
         {
             timer::Timer<timer::TimeUnit::Microseconds> timer;
             int32_t C;
-            std::string opsStr;
+            std::string opsStr;   // 此处仅用于读取，不在 TaskB 内部使用
             std::cin >> C;
-            std::cin.ignore();                 // 忽略换行
+            std::cin.ignore();
             std::getline(std::cin, opsStr);
 
             timer.start();
             TaskB tb;
-            tb.solve(C, opsStr);
+            tb.solve(C, opsStr.c_str());
             timer.stop();
             tb.show_result();
             timer.show_time();
