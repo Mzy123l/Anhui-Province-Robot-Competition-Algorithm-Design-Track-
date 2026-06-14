@@ -3,6 +3,7 @@
 #include "include/fast_charging.h"
 #include "include/energy_classification.h"
 #include "include/delivery_plan.h"
+#include "include/caching_technology.h"
 
 #include "include/timer.hpp"
 #include <iostream>
@@ -19,8 +20,9 @@ namespace Tasks
             switch (choice)
             {
             case 'A': taskA(); break;
-            case 'D': taskD(); break;
+            case 'B': taskB(); break;
             case 'C': taskC(); break;
+            case 'D': taskD(); break;
             case 'E': taskE(); break;
 
             }
@@ -47,7 +49,22 @@ namespace Tasks
         }
 
         void taskB()
-        {}
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            uint32_t c;
+            std::cin >> c;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            char src[200000];
+            
+            std::cin.getline(src, 200000);
+
+            timer.start();
+            CachingTechnology ct;
+            ct.solve(src, c);
+            timer.stop();
+            ct.show_result();
+            timer.show_time();
+        }
         void taskC()
         {
             /*constexpr uint32_t _line = 65535;*/
