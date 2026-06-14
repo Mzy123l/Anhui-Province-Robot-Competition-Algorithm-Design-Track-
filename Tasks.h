@@ -1,6 +1,9 @@
 ﻿#pragma once
 #include "include/brake_distance.h"
 #include "include/fast_charging.h"
+#include "include/energy_classification.h"
+
+
 #include "include/timer.hpp"
 #include <iostream>
 
@@ -17,6 +20,9 @@ namespace Tasks
             {
             case 'A':
                 taskA();
+                break;
+            case 'D':
+                taskD();
                 break;
             case 'E':
                 taskE();
@@ -41,6 +47,24 @@ namespace Tasks
             timer.stop();
 
             bd.show_result();
+
+            timer.show_time();
+        }
+        void taskD()
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+
+            EnergyClassification ec;
+   
+            ec.input();
+
+            timer.start();
+
+            ec.solve();
+
+            timer.stop();
+
+            ec.show_result();
 
             timer.show_time();
         }

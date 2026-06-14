@@ -11,8 +11,9 @@ endif()
 
 project ("Tasks")
 
+file(GLOB SOURCES "src/*.cpp")
 # 将源代码添加到此项目的可执行文件。
-add_executable (Tasks "Tasks.cpp" "src/brake_distance.cpp" "src/fast_charging.cpp")
+add_executable (Tasks "Tasks.cpp" ${SOURCES} "include/energy_classification.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Tasks PROPERTY CXX_STANDARD 23)
