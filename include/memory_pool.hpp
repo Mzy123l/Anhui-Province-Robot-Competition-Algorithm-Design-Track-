@@ -15,7 +15,7 @@ namespace memory_pool
     {
     public:
         // 此处为加快速度不初始化池，初始值均为垃圾值
-        MemoryPool() : _current_pos(_pool.data()) { static_assert(BlockSize > 0, "BlockSize must be greater than 0"); }
+        MemoryPool() : _pool(), _current_pos(_pool.data()) { static_assert(BlockSize > 0, "BlockSize must be greater than 0"); }
         MemoryPool(const MemoryPool&) = delete;
         MemoryPool& operator=(const MemoryPool&) = delete;
         MemoryPool(MemoryPool&&) = delete;

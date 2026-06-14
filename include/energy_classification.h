@@ -24,7 +24,7 @@ namespace Tasks
 
     【数据范围与约定】
     对于 40% 的数据，1 ≤ m ≤ n ≤ 1000，1 ≤ ai ≤ 1000。
-    对于 100% 的数据，1 ≤ m ≤ n ≤ 105，1 ≤ ai ≤ 109。
+    对于 100% 的数据，1 ≤ m ≤ n ≤ 10^5，1 ≤ ai ≤ 10^9。
     */
     class EnergyClassification
     {

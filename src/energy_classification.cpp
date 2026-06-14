@@ -6,7 +6,7 @@
 
 using namespace Tasks;
  
-void Tasks::EnergyClassification::input()
+void EnergyClassification::input()
 {
     std::cin >> _n >> _m;
     _values = _alloc.allocate(_n);
@@ -50,7 +50,7 @@ void EnergyClassification::solve()
     _result = lo;
 }
 
-void Tasks::EnergyClassification::show_result() const
+void EnergyClassification::show_result() const
 {
     std::println("{}", _result);
 }

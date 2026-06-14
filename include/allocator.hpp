@@ -44,7 +44,7 @@ namespace allocator
         // 重新绑定的构造函数
         template<typename U>
         PoolAllocator(const PoolAllocator<U, BlockSize>& other) noexcept
-            : pool_(other.get_pool())
+            : pool_(other.pool_)
         {}
 
         // 分配内存, 特化一个的版本
