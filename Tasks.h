@@ -4,6 +4,7 @@
 #include "include/energy_classification.h"
 #include "include/delivery_plan.h"
 #include "include/caching_technology.h"
+#include "include/gear_calibration.h"
 
 #include "include/timer.hpp"
 #include <iostream>
@@ -24,7 +25,7 @@ namespace Tasks
             case 'C': taskC(); break;
             case 'D': taskD(); break;
             case 'E': taskE(); break;
-
+            case 'F': taskF(); break;
             }
         }
     private:
@@ -124,7 +125,37 @@ namespace Tasks
             timer.show_time();
         }
         void taskF()
-        {}
+        {
+            constexpr int16_t line = 50; // 实际测试 m = 5 时速度接近
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            int16_t target[4];
+            int16_t m;
+            for (uint8_t i = 0; i < static_cast<uint8_t>(4); ++i)
+            {
+                std::cin >> target[i];
+            }
+            std::cin >> m;
+            if (m < line)
+            {
+                GearCalibrationWithSmallElems gc;
+                gc.input(target, m);
+                timer.start();
+                gc.solve();
+                timer.stop();
+                gc.show_result();
+                timer.show_time();
+            }
+            else
+            {
+                GearCalibration gc;
+                gc.input(target, m);
+                timer.start();
+                gc.solve();
+                timer.stop();
+                gc.show_result();
+                timer.show_time();
+            }
+        }
         void taskG()
         {}
         void taskH()

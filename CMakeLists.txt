@@ -20,7 +20,7 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Tasks PROPERTY CXX_STANDARD 23)
 endif()
 if(MSVC)
-    target_link_options(Tasks PRIVATE /STACK:16777216)   # 10 MB
+    target_link_options(Tasks PRIVATE /STACK:16777216)   # 16 MB
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
