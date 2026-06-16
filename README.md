@@ -224,10 +224,6 @@ std::vector<int, decltype(alloc)> vec(alloc);
 
 ## 许可证
 
-本项目采用 MIT 许可证。详情请参阅 ./LICENSE 文件。pp`，理解整体结构。
-2. 选择一个未完成任务，按照上述步骤创建 `.h` 和 `.cpp`。
-3. 在 `Tasks.h` 中注册，编译运行测试。
-4. 使用 `timer` 测量性能，确保满足题目时限。
-
+本项目采用 MIT 许可证。详情请参阅 ./LICENSE 文件
 ---
 
