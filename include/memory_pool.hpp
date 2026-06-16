@@ -1,6 +1,7 @@
 #pragma once
 #include <cstddef>
 #include <array>
+#include <cstdarg>
 
 namespace memory_pool
 {
@@ -14,7 +15,7 @@ namespace memory_pool
     {
     public:
         // 此处为加快速度不初始化池，初始值均为垃圾值
-        MemoryPool() : _current_pos(_pool.data()) { static_assert(BlockSize > 0, "BlockSize must be greater than 0"); }
+        MemoryPool() : _pool(), _current_pos(_pool.data()) { static_assert(BlockSize > 0, "BlockSize must be greater than 0"); }
         MemoryPool(const MemoryPool&) = delete;
         MemoryPool& operator=(const MemoryPool&) = delete;
         MemoryPool(MemoryPool&&) = delete;
@@ -37,6 +38,30 @@ namespace memory_pool
             {
                 _current_pos = new_pos;
             }
+            return static_cast<void*>(aligned_ptr);
+        }
+
+        template<typename T>
+        void* allocate(std::size_t n)
+        {
+            // 将当前指针转为整数，计算对齐所需的填充字节数
+            std::uintptr_t ptr = reinterpret_cast<std::uintptr_t>(_current_pos);
+            std::size_t padding = (ptr % alignof(T) ? alignof(T) - (ptr % alignof(T)) : 0);
+
+            // 得到对齐后的起始地址
+            char* aligned_ptr = reinterpret_cast<char*>(_current_pos + padding);
+
+            // 计算分配 n 个对象后的新位置
+            char* new_pos = aligned_ptr + n * sizeof(T);
+
+            // 检查是否超出内存池边界
+            if (new_pos > _pool.data() + BlockSize)
+            {
+                return nullptr; // 空间不足
+            }
+
+            // 更新当前指针，返回对齐后的起始地址
+            _current_pos = new_pos;
             return static_cast<void*>(aligned_ptr);
         }
 

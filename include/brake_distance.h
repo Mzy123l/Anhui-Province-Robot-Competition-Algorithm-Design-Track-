@@ -1,10 +1,11 @@
 #pragma once
 #include "allocator.hpp"
 #include <print>
+#include <cstdint>
+
 namespace Tasks
 {
     // A.间距调整 / Brake distance
-
     /*在智能网联汽车队列中，车辆通过V2V通信协调行驶，并实时调整与前车的车间距，
     定义当前车间距为一个正整数，初始间距为1（单位：米）。
     一种自适应间距控制策略允许在每一轮控制周期中，对当前间距执行三种原子操作之一：
@@ -13,7 +14,6 @@ namespace Tasks
         • C操作（回退缩小）：令间距−1，但仅当当前间距严格大于1时允许执行（间距始终保持为正整数）。
         每执行一次操作计为一步。现给定目标间距n，请你构造一条从1到n的操作序列，使总步数最少。
         若存在多条最少步数的序列，输出字典序最小的操作串。*/
-
     /*
     * 【输入格式】
     * 从标准输入读入数据。
@@ -40,8 +40,7 @@ namespace Tasks
         void solve(uint32_t n);
         void show_result() const;
 
-    private:
-        void reverse_inplace(char* begin, char* end);
+   
         
     private:
         memory_pool::MemoryPool<64> _pool;

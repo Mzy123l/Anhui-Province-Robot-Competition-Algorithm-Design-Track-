@@ -1,10 +1,12 @@
 #include "../include/brake_distance.h"
 #include <print>
+#include <algorithm>
+
 using namespace Tasks;
 
 void BrakeDistance::solve(uint32_t n)
 {
-    _result = _alloc.allocate();
+    _result = _alloc.allocate(64);
     auto current = _result;
     while (n > 1)
     {
@@ -33,12 +35,9 @@ void BrakeDistance::solve(uint32_t n)
     }
     _steps = current - _result;
     _alloc.construct(current, '\0');
-    reverse_inplace(_result, current);
+    std::reverse(_result, current);
 }
-void BrakeDistance::reverse_inplace(char* begin, char* end)
-{
-    std::reverse(begin, end);
-}
+
 
 void BrakeDistance::show_result() const
 {
