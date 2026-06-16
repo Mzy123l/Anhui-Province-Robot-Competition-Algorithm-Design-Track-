@@ -7,6 +7,7 @@
 #include "include/gear_calibration.h"
 #include "include/independent_service.h"
 #include "include/keep_health.h"
+#include "include/line_optimization.h"
 
 #include "include/timer.hpp"
 #include <iostream>
@@ -30,6 +31,7 @@ namespace Tasks
             case 'F': taskF(); break;
             case 'G': taskG(); break;
             case 'I': taskI(); break;
+            case 'J': taskJ(); break;
             }
         }
     private:
@@ -188,6 +190,15 @@ namespace Tasks
 
         }
         void taskJ()
-        {}
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            LineOptimization lo;
+            lo.input();
+            timer.start();
+            lo.solve();
+            timer.stop();
+            lo.show_result();
+            timer.show_time();
+        }
     };
 }

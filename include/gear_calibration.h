@@ -50,7 +50,7 @@ namespace Tasks
         bool is_target_reached(const int16_t* p) const;
     private:
 
-        static constexpr std::size_t _block_size = 65536;
+        static constexpr std::size_t _block_size = 10000000;
         // 产线总数
         uint16_t _m;
         // 目标需求量（Li, Co, Ni, Mn）
