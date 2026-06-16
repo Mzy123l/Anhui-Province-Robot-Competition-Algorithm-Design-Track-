@@ -5,6 +5,7 @@
 #include <string>
 #include <variant>
 #include <string_view>
+#include "small_string.hpp"
 
 namespace Tasks
 {
@@ -66,8 +67,8 @@ namespace Tasks
 		template <typename T>
 		using Alloc = allocator::PoolAllocator <T, _block_size>;
 
-		using _string = std::string; // SSO优化
-		using _string_view = std::string_view;
+		using _string = tools::sstring;
+		using _string_view = tools::sstring_view;
 
 		void parse_stringline(char*);
 		void _buy(const _string&);

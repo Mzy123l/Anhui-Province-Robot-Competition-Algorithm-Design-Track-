@@ -113,10 +113,11 @@ void KeepHealth::_use()
 }
 void KeepHealth::_return(const _string& str)
 {
-    uint32_t count = ++_outer[str];
+    auto str_view = _string_view(str);
+    uint32_t count = ++_outer[str_view];
     if (count == K)
     {
-        _res.emplace_back(str);
+        _res.emplace_back(str_view);
     }
     else
     {
