@@ -8,7 +8,7 @@
 #include "include/independent_service.h"
 #include "include/keep_health.h"
 #include "include/line_optimization.h"
-
+#include "include/journey_endurance.h"
 #include "include/timer.hpp"
 #include <iostream>
 
@@ -30,6 +30,7 @@ namespace Tasks
             case 'E': taskE(); break;
             case 'F': taskF(); break;
             case 'G': taskG(); break;
+            case 'H': taskH(); break;
             case 'I': taskI(); break;
             case 'J': taskJ(); break;
             }
@@ -174,7 +175,16 @@ namespace Tasks
             timer.show_time();
         }
         void taskH()
-        {}
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            JourneyEndurance je;
+            je.input();
+            timer.start();
+            je.solve();
+            timer.stop();
+            je.show_result();
+            timer.show_time();
+        }
         void taskI()
         {
             timer::Timer<timer::TimeUnit::Microseconds> timer;
