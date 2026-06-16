@@ -26,9 +26,9 @@ endif()
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     # Linux 下常用 --stack，macOS 需用 -Wl,-stack_size,...
     if(APPLE)
-        target_link_options(Tasks PRIVATE -Wl,-stack_size,0x10000000)   # 160 MB
+        target_link_options(Tasks PRIVATE -Wl,-stack_size,524288000)   # 500 MB
     else()
-        target_link_options(Tasks PRIVATE -Wl,--stack,167772160)        # 160 MB
+        target_link_options(Tasks PRIVATE -Wl,--stack,524288000)        # 500 MB
     endif()
 endif()
 # TODO: 如有需要，请添加测试并安装目标。
