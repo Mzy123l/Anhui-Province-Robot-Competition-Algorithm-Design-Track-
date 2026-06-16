@@ -4,6 +4,7 @@
 #include <unordered_map>
 #include <string>
 #include <variant>
+#include <string_view>
 
 namespace Tasks
 {
@@ -55,7 +56,7 @@ namespace Tasks
 	public:
 		KeepHealth(uint32_t Q, uint32_t K) : _pool(), _alloc(_pool), Q(Q), K(K),
 			_outer(Alloc<std::pair<const _string, uint32_t>>(_alloc)), _warehouse(Alloc<_battery>(_alloc)),
-			_src(Alloc<std::pair<uint16_t, _string>>(_alloc)), _res(Alloc <std::variant <_string, uint32_t>>(_alloc)){}
+			_src(Alloc<std::pair<uint16_t, _string>>(_alloc)), _res(Alloc <std::variant <_string_view, uint32_t>>(_alloc)){}
 		void input();
 		void solve();
 		void show_result() const;
@@ -66,6 +67,7 @@ namespace Tasks
 		using Alloc = allocator::PoolAllocator <T, _block_size>;
 
 		using _string = std::string; // SSO优化
+		using _string_view = std::string_view;
 
 		void parse_stringline(char*);
 		void _buy(const _string&);
@@ -81,7 +83,7 @@ namespace Tasks
 		struct _battery
 		{
 			_battery(const _string& name, uint32_t count = 0);
-			_string _name;
+			_string_view _name;
 			uint32_t _charge_count;
 			uint32_t _time_stamp;
 
@@ -94,12 +96,13 @@ namespace Tasks
 		uint32_t Q;
 		uint32_t K;
 
-		std::unordered_map <_string, uint32_t, std::hash<_string>, std::equal_to<_string>, Alloc<std::pair<const _string, uint32_t>>> _outer; // 外部
+		std::unordered_map <_string_view, uint32_t, std::hash<_string_view>, std::equal_to<_string_view>, 
+			Alloc<std::pair<const _string_view, uint32_t>>> _outer; // 外部
 		std::priority_queue <_battery, std::vector<_battery, Alloc<_battery>>, _battery::Compare> _warehouse; // 内部
 		// 1-买进电池 2-取用电池 3-归还电池 4-查询库存  |  name
 		std::vector <std::pair<uint16_t, _string>, Alloc<std::pair<uint16_t, _string>>> _src; // 输入
 		// name | 库存
-		std::vector <std::variant <_string, uint32_t>, Alloc <std::variant <_string, uint32_t>>> _res; // 输出
+		std::vector <std::variant <_string_view, uint32_t>, Alloc <std::variant <_string_view, uint32_t>>> _res; // 输出
 
 	};
 

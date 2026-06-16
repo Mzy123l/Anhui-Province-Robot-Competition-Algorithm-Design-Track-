@@ -1,6 +1,8 @@
 #include "../include/keep_health.h"
 #include <iostream>
 #include <print>
+#include <utility>
+
 using namespace Tasks;
 
 uint32_t KeepHealth::TimeStamp = 0;
@@ -82,7 +84,8 @@ void KeepHealth::solve()
     std::vector<_battery, Alloc<_battery>> _temp{ Alloc<_battery>(_alloc) };
     _temp.reserve(Q);
     _outer.reserve(Q);
-    _warehouse = std::priority_queue<_battery, std::vector<_battery, Alloc<_battery>>, _battery::Compare>{ _battery::Compare {}, std::move(_temp) };
+    _warehouse = std::priority_queue<_battery, std::vector<_battery, Alloc<_battery>>, 
+        _battery::Compare>{ _battery::Compare {}, std::move(_temp) };
 
 
     for (const auto& op : _src)
