@@ -5,6 +5,8 @@
 #include "include/delivery_plan.h"
 #include "include/caching_technology.h"
 #include "include/gear_calibration.h"
+#include "include/independent_service.h"
+#include "include/keep_health.h"
 
 #include "include/timer.hpp"
 #include <iostream>
@@ -26,6 +28,8 @@ namespace Tasks
             case 'D': taskD(); break;
             case 'E': taskE(); break;
             case 'F': taskF(); break;
+            case 'G': taskG(); break;
+            case 'I': taskI(); break;
             }
         }
     private:
@@ -126,7 +130,7 @@ namespace Tasks
         }
         void taskF()
         {
-            constexpr int16_t line = 50; // 实际测试 m = 5 时速度接近
+            constexpr int16_t line = 50; // 实际测试 m = 50 时速度接近
             timer::Timer<timer::TimeUnit::Microseconds> timer;
             int16_t target[4];
             int16_t m;
@@ -157,11 +161,32 @@ namespace Tasks
             }
         }
         void taskG()
-        {}
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            IndependentService is;
+            is.input();
+            timer.start();
+            is.solve();
+            timer.stop();
+            is.show_result();
+            timer.show_time();
+        }
         void taskH()
         {}
         void taskI()
-        {}
+        {
+            timer::Timer<timer::TimeUnit::Microseconds> timer;
+            uint32_t Q, K;
+            std::cin >> Q >> K;
+            KeepHealth kh(Q, K);
+            kh.input();
+            timer.start();
+            kh.solve();
+            timer.stop();
+            kh.show_result();
+            timer.show_time();
+
+        }
         void taskJ()
         {}
     };

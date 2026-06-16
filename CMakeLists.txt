@@ -20,15 +20,15 @@ if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Tasks PROPERTY CXX_STANDARD 23)
 endif()
 if(MSVC)
-    target_link_options(Tasks PRIVATE /STACK:16777216)   # 16 MB
+    target_link_options(Tasks PRIVATE /STACK:524288000)   # 500 MB
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
     # Linux 下常用 --stack，macOS 需用 -Wl,-stack_size,...
     if(APPLE)
-        target_link_options(Tasks PRIVATE -Wl,-stack_size,0x1000000)   # 16 MB
+        target_link_options(Tasks PRIVATE -Wl,-stack_size,0x10000000)   # 160 MB
     else()
-        target_link_options(Tasks PRIVATE -Wl,--stack,16777216)        # 16 MB
+        target_link_options(Tasks PRIVATE -Wl,--stack,167772160)        # 160 MB
     endif()
 endif()
 # TODO: 如有需要，请添加测试并安装目标。
