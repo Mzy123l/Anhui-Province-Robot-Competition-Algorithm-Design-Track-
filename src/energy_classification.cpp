@@ -10,7 +10,7 @@ void EnergyClassification::input()
 {
     std::cin >> _n >> _m;
     _values = _alloc.allocate(_n);
-    for (uint32_t i = 1; i < _n; ++i)
+    for (uint32_t i = 0; i < _n; ++i)
     {
         std::cin >> _values[i];
     }
