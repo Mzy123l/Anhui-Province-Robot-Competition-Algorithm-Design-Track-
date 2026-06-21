@@ -68,7 +68,7 @@ namespace Tasks
 
         uint16_t _c;
         uint16_t _current_count;
-        static constexpr std::size_t _block_size = 800000;
+        static constexpr std::size_t _block_size = 80000000;
         memory_pool::MemoryPool<_block_size> _pool;
         allocator::PoolAllocator<int32_t, _block_size> _alloc;
 
